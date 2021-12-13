@@ -234,3 +234,23 @@ span.has-inline-color > strong {
 	top: 0.1em;
     position: relative;
 }
+
+.full-height {
+	height: 95%;
+}
+.full-width {
+	width: 100%;
+}
+.bg-grey {
+	background-color: #f5f5f5;
+}
+.bg-white {
+	background-color: #ffffff;
+}
+
+.tile{
+	display: inline !important;
+  }
+.tile a {
+	text-decoration: none;
+}
