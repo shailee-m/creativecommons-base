@@ -1,10 +1,13 @@
 <?php
 get_header();
-$author_image_url = get_avatar_url(get_queried_object()->ID, 'squared');
+$author_id = get_queried_object()->ID;
+$author_meta = get_user_meta($author_id);
+
+$author_image_url = get_avatar_url($author_id, 'squared');
 $user_nicename = get_queried_object()->user_nicename;
-$cc_position = get_user_meta(get_queried_object()->ID)["cc_position"]['0'];
-$author_description =  get_user_meta(get_queried_object()->ID)["description"]['0'];
-$first_name = get_user_meta(get_queried_object()->ID)["first_name"]['0'];
+$cc_position = $author_meta["cc_position"]['0'];
+$author_description =  $author_meta["description"]['0'];
+$first_name = $author_meta["first_name"]['0'];
 
 ?>
 <header class="page-header  bg-grey">
