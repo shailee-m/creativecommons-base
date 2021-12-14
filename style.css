@@ -254,3 +254,10 @@ span.has-inline-color > strong {
 .tile a {
 	text-decoration: none;
 }
+.divider {
+	border-top: thin solid #B0B0B0;
+	border-bottom: thin solid #B0B0B0;
+}
+.color-black {
+	color: #000000;
+}

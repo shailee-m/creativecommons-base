@@ -1,6 +1,11 @@
 <?php
 get_header();
 $author_image_url = get_avatar_url(get_queried_object()->ID, 'squared');
+$user_nicename = get_queried_object()->user_nicename;
+$cc_position = get_user_meta(get_queried_object()->ID)["cc_position"]['0'];
+$author_description =  get_user_meta(get_queried_object()->ID)["description"]['0'];
+$first_name = get_user_meta(get_queried_object()->ID)["first_name"]['0'];
+
 ?>
 <header class="page-header  bg-grey">
 	<?php
@@ -12,13 +17,13 @@ $author_image_url = get_avatar_url(get_queried_object()->ID, 'squared');
 		<div class="columns m-0 is-centered">
 			<?php if (!empty($author_image_url)) : ?>
 				<div class="column is-4">
-					<img alt="" src="<?php echo $author_image_url ?>" class="avatar avatar-96 full-height full-width photo p-3 bg-white" loading="lazy">
+					<img alt="Author Photo" src="<?php echo $author_image_url ?>" class="avatar avatar-96 full-height full-width photo p-3 bg-white" loading="lazy">
 				</div>
 			<?php endif; ?>
 			<div class="column">
-				<h2><?php echo get_queried_object()->user_nicename ?></h2>
-				<h4><?php echo join(", ", get_user_meta(get_queried_object()->ID)["cc_position"]) ?></h4>
-				<p class="mt-2"><?php echo nl2br(join(", ", get_user_meta(get_queried_object()->ID)["description"])) ?></p>
+				<div class="is-size-2 is-uppercase color-black has-text-weight-bold"><?php echo $user_nicename ?></div>
+				<div class="is-size-4 is-uppercase color-black has-text-weight-bold"><?php echo $cc_position ?></div>
+				<p class="mt-2"><?php echo nl2br($author_description) ?></p>
 			</div>
 		</div>
 	</div>
@@ -26,13 +31,16 @@ $author_image_url = get_avatar_url(get_queried_object()->ID, 'squared');
 <section class="main-content">
 	<div class="container">
 		<div class="columns padding-vertical-larger">
-			<div class="column is-8">
+			<div class="column">
 				<?php
 				if (have_posts()) :
-					echo "<h2 class='mb-2'>" . join(" ", get_user_meta(get_queried_object()->ID)["first_name"]) . "'s Posts</h2>";
+					echo "<h2 class='mb-2'>" . $first_name . "'s Posts</h2>";
+					$row = 1;
 					while (have_posts()) :
+						$is_last_post = $wp_query->post_count === $row;
 						the_post();
-						echo Components::simple_entry(get_the_ID(), true, true);
+						echo Components::simple_entry(get_the_ID(), true, true, null, null, null, null, null, null, $is_last_post);
+						$row++;
 					endwhile;
 
 					$links = paginate_links(array(

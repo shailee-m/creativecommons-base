@@ -370,12 +370,12 @@ class Components
 	 * @param string  $excerpt : the excerpt of the entry
 	 * @return string component layout
 	 */
-	public static function simple_entry($post_id, $has_content = true, $has_image = true, $use_remote_data = null, $title = null, $image_url = null, $date = null, $permalink = null, $excerpt = null)
+	public static function simple_entry($post_id, $has_content = true, $has_image = true, $use_remote_data = null, $title = null, $image_url = null, $date = null, $permalink = null, $excerpt = null, $is_last_post = false)
 	{
 		$has_thumb       = (!$use_remote_data) ? has_post_thumbnail($post_id) : !empty($image_url);
 		$has_thumb_class = (!empty($has_thumb)) ? ' has-image' : '';
 		$external        = ($use_remote_data) ? ' target="_blank" ' : '';
-		$out             = '<article class="entry-simple-post mt-2' . $has_thumb_class . '">';
+		$out             = '<article class="entry-simple-post mt-2 is-align-content-end' . $has_thumb_class . '">';
 		$out            .= '<div class="columns is-gapless">';
 		$out            .= '<figure class="entry-image column is-4">';
 
@@ -408,10 +408,12 @@ class Components
 			}
 			$out     .= '</div>';
 		}
-		
-		$out       .= '<div class="mb-2"></div>';
+
 		$out       .= '</div>';
 		$out       .= '</div>';
+		if (!$is_last_post) {
+			$out   .= '<hr class="divider"/>';
+		}
 		$out       .= '</article>';
 		return $out;
 	}
