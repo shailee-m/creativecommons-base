@@ -377,7 +377,7 @@ class Components
 		$external        = ($use_remote_data) ? ' target="_blank" ' : '';
 		$out             = '<article class="entry-simple-post mt-2 is-align-content-end' . $has_thumb_class . '">';
 		$out            .= '<div class="columns is-gapless">';
-		$out            .= '<figure class="entry-image column is-4">';
+		$out            .= '<figure class="entry-image column m-2 is-4">';
 
 		if ($has_thumb && $has_image) {
 			$thumb_image = (!$use_remote_data) ? get_the_post_thumbnail($post_id, 'landscape-small') : '<img src="' . $image_url . '" alt="' . $title . '" />';
